@@ -1,0 +1,46 @@
+{
+class: binary
+project: ""
+output: ""
+extension: .skel
+nonessential: false
+createAtlas: true
+texturePacker: {
+	pot: false
+	paddingX: 2
+	paddingY: 2
+	edgePadding: true
+	duplicatePadding: false
+	rotation: true
+	minWidth: 16
+	minHeight: 16
+	maxWidth: 2048
+	maxHeight: 2048
+	square: false
+	stripWhitespaceX: true
+	stripWhitespaceY: true
+	alphaThreshold: 0
+	filterMin: Linear
+	filterMag: Linear
+	wrapX: ClampToEdge
+	wrapY: ClampToEdge
+	format: RGBA8888
+	alias: true
+	outputFormat: png
+	jpegQuality: 0.9
+	ignoreBlankImages: false
+	fast: true
+	debug: false
+	silent: false
+	combineSubdirectories: false
+	flattenPaths: false
+	premultiplyAlpha: false
+	useIndexes: false
+	bleed: true
+	limitMemory: true
+	grid: false
+	scale: [ 0.6 ]
+	scaleSuffix: [ "" ]
+	atlasExtension: .atlas
+}
+}

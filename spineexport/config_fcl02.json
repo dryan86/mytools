@@ -1,0 +1,39 @@
+{
+	"version":"3.6.47",
+	"exportType":".skel",
+	"defaultConfig":"/../default_config.json",
+	"dbPath":"/../fcl02_storeMd5.db",
+	"filePath":[
+		{
+			"input":"/../../AE/动作/三神将",
+			"output":"/../../Output/animation/hero",
+			"scale":0.25,
+			"type":"hero",
+			"ignore":[
+			],
+			"special":[
+			]
+		},
+		{
+			"input":"/../../AE/动作/主角",
+			"output":"/../../Output/animation/hero",
+			"scale":0.5,
+			"type":"hero",
+			"ignore":[
+			],
+			"special":[
+			]
+		},
+		{
+			"input":"/../../AE/动作/低级卡",
+			"output":"/../../Output/animation/hero",
+			"scale":0.2,
+			"type":"hero",
+			"ignore":[
+			],
+			"special":[
+				{"name" : "hero_zhuziliu", "scale":0.32}
+			]
+		}
+	]
+}
