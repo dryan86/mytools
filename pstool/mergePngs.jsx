@@ -431,14 +431,20 @@ function main(){
        
                 var tmpName = getLayerToChange.name;
                 tmpName = tmpName.substring(0, tmpName.indexOf("."));
-                var slotInfo = jsonInfo.skins["default"][tmpName][tmpName];
                 
-                var fixx = slotInfo.x - Math.round(slotInfo.width)/2;
-                var fixy = defaultSetting.canvasHeight - (slotInfo.y + Math.round(slotInfo.height)/2);
+                var boneInfo = jsonInfo.skins["default"][tmpName]
+                if (boneInfo != undefined){
+                    var slotInfo = boneInfo[tmpName];
+                    
+                    var fixx = slotInfo.x - Math.round(slotInfo.width)/2;
+                    var fixy = defaultSetting.canvasHeight - (slotInfo.y + Math.round(slotInfo.height)/2);
 
-                var x = UnitValue( fixx, "px" );
-                var y = UnitValue( fixy, "px" );
-                getLayerToChange.translate (x, y);
+                    var x = UnitValue( fixx, "px" );
+                    var y = UnitValue( fixy, "px" );
+                    getLayerToChange.translate (x, y);
+                }else{
+                    $.writeln("多余文件:" + tmpName);
+                 }
              };  
         };
 
@@ -462,7 +468,8 @@ function main(){
             var preLayer = null;
              for (var m in jsonInfo.slots) 
              {
-                var curLayer = allLayers[m.name];
+                 var tmpObj = jsonInfo.slots[m];
+                var curLayer = allLayers[tmpObj.name];
                  if (preLayer != null){
                      curLayer.move (preLayer, ElementPlacement.PLACEBEFORE);
                  }
