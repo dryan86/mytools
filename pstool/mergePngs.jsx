@@ -486,9 +486,7 @@ function getJsonData(filePath){
     var fileString = "";  
     while (!file.eof){  
         var line = file.readln();  
-        if (fileString.indexOf(line) == -1){  
-            fileString += line;  
-        }  
+        fileString += line;  
     }  
     
     var obj;
