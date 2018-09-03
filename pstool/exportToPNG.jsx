@@ -30,7 +30,7 @@ function main () {
 	var layerVisibility = {};
 
     var exportLayers = [];
-    var re = new RegExp("^[a-zA-Z0-9_]+$"); 
+    var re = new RegExp("^[a-zA-Z0-9_.]+$"); 
 	for (var i = layerCount - 1; i >= 0; i--) {
 		var layer = layers[i];
 		layerVisibility[layer] = layer.visible;
@@ -70,13 +70,79 @@ function main () {
 			if (savePNGs) {
 				if (scaleFactor != 1) scaleImage();
 
-				var file = File(dir + "/" + trim(layer.name));
+                  var tmpName =  trim(layer.name);
+
+                // if png or jpg
+                var fileExt = ".png"
+                var index = tmpName.lastIndexOf(".");
+                if (index != -1) {
+                    var ext = tmpName.substr(index+1);
+                    if (ext == "jpg"){
+                        fileExt = ".jpg"
+                    }
+                }
+            
+                if (fileExt == ".png"){
+                  tmpName = tmpName + fileExt;
+                }
+                  
+				var file = File(dir + "/" + tmpName);
 				if (file.exists) file.remove();
 
-                var options = new PNGSaveOptions();
-                options.compression = 9;
-                options.PNG8 = false;
-                activeDocument.saveAs(file, options, true, Extension.LOWERCASE);
+                // save png start
+                if (fileExt == ".jpg"){
+                    var jpgSaveOptions = new JPEGSaveOptions();
+                    jpgSaveOptions.embedColorProfile = true;
+                    jpgSaveOptions.formatOptions = FormatOptions.STANDARDBASELINE;
+                    jpgSaveOptions.matte = MatteType.NONE;
+                    jpgSaveOptions.quality = 9; //1-12
+                    activeDocument.saveAs(file, jpgSaveOptions, true, Extension.LOWERCASE);
+                }
+            
+                if (fileExt == ".png"){
+                      var id6 = charIDToTypeID('Expr')
+                      var desc3 = new ActionDescriptor()
+                      var id7 = charIDToTypeID('Usng')
+                      var desc4 = new ActionDescriptor()
+                      var id8 = charIDToTypeID('Op  ')
+                      var id9 = charIDToTypeID('SWOp')
+                      var id10 = charIDToTypeID('OpSa')
+                      desc4.putEnumerated(id8, id9, id10)
+                      var id11 = charIDToTypeID('Fmt ')
+                      var id12 = charIDToTypeID('IRFm')
+                      var id13 = charIDToTypeID('PN24')
+                      desc4.putEnumerated(id11, id12, id13)
+                      var id14 = charIDToTypeID('Intr')
+                      desc4.putBoolean(id14, true)
+                      var id15 = charIDToTypeID('Trns')
+                      desc4.putBoolean(id15, true)
+                      var id16 = charIDToTypeID('Mtt ')
+                      desc4.putBoolean(id16, true)
+                      var id17 = charIDToTypeID('MttR')
+                      desc4.putInteger(id17, 255)
+                      var id18 = charIDToTypeID('MttG')
+                      desc4.putInteger(id18, 255)
+                      var id19 = charIDToTypeID('MttB')
+                      desc4.putInteger(id19, 255)
+                      var id20 = charIDToTypeID('SHTM')
+                      desc4.putBoolean(id20, false)
+                      var id21 = charIDToTypeID('SImg')
+                      desc4.putBoolean(id21, true)
+                      var id22 = charIDToTypeID('SSSO')
+                      desc4.putBoolean(id22, false)
+                      var id23 = charIDToTypeID('SSLt')
+                      var list1 = new ActionList()
+                      desc4.putList(id23, list1)
+                      var id24 = charIDToTypeID('DIDr')
+                      desc4.putBoolean(id24, false)
+                      var id25 = charIDToTypeID('In  ')
+                      desc4.putPath(id25, new File(dir + "/" + tmpName))
+                      desc4.putBoolean(charIDToTypeID('EICC'), false)
+                      var id26 = stringIDToTypeID('SaveForWeb')
+                      desc3.putObject(id7, id26, desc4)
+                      executeAction(id6, desc3, DialogModes.NO)
+                }
+                // save png end
 
 				if (scaleFactor != 1) stepHistoryBack();
 			}
